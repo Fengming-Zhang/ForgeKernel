@@ -9,8 +9,8 @@
 </div>
 
 本目录公开论文
-[*ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents*](https://openreview.net/pdf?id=EtV3f5BPD4)
-（ICLR 2027 审稿中）里由 ForgeKernel 生成的算子（kernel）代码，以及论文投稿之后 ForgeKernel 新生成的一个算子，
+[*ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents*](https://arxiv.org/abs/2611.04998)
+（[arXiv:2611.04998](https://arxiv.org/abs/2611.04998)，ICLR 2027 审稿中）里由 ForgeKernel 生成的算子（kernel）代码，以及论文投稿之后 ForgeKernel 新生成的一个算子，
 后者在下表中标为「论文之后」。
 
 ForgeKernel 是一个自进化的 kernel agent。它只通过硬件行为读出参照 kernel 的架构：对一个封装好的

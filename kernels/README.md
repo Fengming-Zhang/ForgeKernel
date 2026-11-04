@@ -9,8 +9,8 @@
 </div>
 
 This directory releases the operator (kernel) code produced by ForgeKernel in the paper
-[*ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents*](https://openreview.net/pdf?id=EtV3f5BPD4)
-(under review at ICLR 2027), plus a kernel ForgeKernel generated after the paper was submitted,
+[*ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents*](https://arxiv.org/abs/2611.04998)
+([arXiv:2611.04998](https://arxiv.org/abs/2611.04998); under review at ICLR 2027), plus a kernel ForgeKernel generated after the paper was submitted,
 marked "after the paper" below.
 
 ForgeKernel is a self-evolving kernel agent. It reads a reference kernel's architecture from

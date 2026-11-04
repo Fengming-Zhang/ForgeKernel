@@ -4,6 +4,7 @@
 
 **English** | [中文](README_zh.md)
 
+[![arXiv](https://img.shields.io/badge/arXiv-2611.04998-b31b1b)](https://arxiv.org/abs/2611.04998)
 [![Quick Start](https://img.shields.io/badge/Docs-Quick%20Start-blue.svg)](#quick-start)
 [![Design](https://img.shields.io/badge/Docs-Design-blue.svg)](docs/design/v1-launch.md)
 
@@ -30,6 +31,7 @@ ForgeKernel is part of the **Forge family**, together with
 
 ## News
 
+- 📄 **[2026-11]** ForgeKernel paper release: [arXiv:2611.04998](https://arxiv.org/abs/2611.04998).
 - 📄 **[2026-10]** JustGoal paper release: [arXiv:2610.36434](https://arxiv.org/abs/2610.36434).
 - 🏆 **[2026-10]** We reached **#1** on the FlashInfer-Bench leaderboard of NVIDIA
   [SOL-ExecBench](https://research.nvidia.com/benchmarks/sol-execbench).
@@ -301,6 +303,29 @@ entry needs a GPU probe that certifies it; see [docs/kb-harvest.md](docs/kb-harv
   hierarchies unlike these are untested.
 - **Cost.** A run is hours of GPU time and frontier-model usage, and the agents run with
   permissions bypassed inside a policy the driver writes; run it on a machine meant for it.
+
+## Citation
+
+If you use ForgeKernel, please cite our paper:
+
+<details>
+<summary>BibTeX</summary>
+
+```bibtex
+@misc{chen2026forgekernel,
+  title  = {ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents},
+  author = {Chen, Yaojian and Peng, Dazhi and Zheng, Yiyun and Zhu, Zhui and Xiang, Shengye
+            and Li, Leshan and Li, Zhen and Deng, Xianglong and Sun, Haojun and He, Qingfeng
+            and Li, Shangzhan and Shen, Yifei and Gan, Lin and Li, Yuxuan and Han, Xu
+            and Liu, Zhiyuan},
+  year   = {2026},
+  eprint = {2611.04998},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2611.04998}
+}
+```
+
+</details>
 
 ## License
 

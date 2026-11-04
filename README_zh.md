@@ -4,6 +4,7 @@
 
 [English](README.md) | **中文**
 
+[![arXiv](https://img.shields.io/badge/arXiv-2611.04998-b31b1b)](https://arxiv.org/abs/2611.04998)
 [![Quick Start](https://img.shields.io/badge/Docs-快速开始-blue.svg)](#快速开始)
 [![Design](https://img.shields.io/badge/Docs-设计文档-blue.svg)](docs/design/v1-launch.md)
 
@@ -28,6 +29,7 @@ ForgeKernel 属于 **Forge 家族**，同一家族的项目还有
 
 ## 动态
 
+- 📄 **[2026-11]** ForgeKernel 论文发布：[arXiv:2611.04998](https://arxiv.org/abs/2611.04998)。
 - 📄 **[2026-10]** JustGoal 论文发布：[arXiv:2610.36434](https://arxiv.org/abs/2610.36434)。
 - 🏆 **[2026-10]** 我们在 NVIDIA [SOL-ExecBench](https://research.nvidia.com/benchmarks/sol-execbench)
   的 FlashInfer-Bench 榜单上取得**第一名**。
@@ -270,6 +272,29 @@ kernels/             ForgeKernel 生成的 kernel，按算子类型分类
 - **覆盖范围。** 四类算子、两代 NVIDIA GPU；与这些差异较大的稀疏模式和存储层次尚未测试。
 - **成本。** 一次运行要数小时的 GPU 时间和前沿模型用量；agent 在 driver 写好的策略内以跳过权限
   确认的方式运行，请在专门的机器上使用。
+
+## 引用
+
+如果 ForgeKernel 对你有帮助，请引用我们的论文：
+
+<details>
+<summary>BibTeX</summary>
+
+```bibtex
+@misc{chen2026forgekernel,
+  title  = {ForgeKernel: Self-Evolving Kernels Catching and Surpassing Experts and Agents},
+  author = {Chen, Yaojian and Peng, Dazhi and Zheng, Yiyun and Zhu, Zhui and Xiang, Shengye
+            and Li, Leshan and Li, Zhen and Deng, Xianglong and Sun, Haojun and He, Qingfeng
+            and Li, Shangzhan and Shen, Yifei and Gan, Lin and Li, Yuxuan and Han, Xu
+            and Liu, Zhiyuan},
+  year   = {2026},
+  eprint = {2611.04998},
+  archivePrefix = {arXiv},
+  url    = {https://arxiv.org/abs/2611.04998}
+}
+```
+
+</details>
 
 ## 许可证
 
