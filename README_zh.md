@@ -248,6 +248,14 @@ tests/               pytest 测试（只需 CPU）
 kernels/             ForgeKernel 生成的 kernel，按算子类型分类
 ```
 
+## TODO
+
+**ForgeKernel v1.5** 计划：
+
+- [ ] **Shape 聚类**：把任务的 shape 聚成若干类、按类优化，让一次运行覆盖更大范围的 shape。
+- [ ] **大幅简化 harness**：精简 loop 的组成部分，缩小配置面。
+- [ ] **与 [ForgeTrain](https://github.com/OpenBMB/ForgeTrain) 和 ForgeMegaKernel（进行中）合并为一个仓库**。
+
 ## 参与贡献
 
 欢迎各种形式的贡献：bug 报告、功能建议、pull request、文档与翻译。提交改动前请跑测试
