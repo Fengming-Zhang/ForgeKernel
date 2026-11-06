@@ -879,7 +879,7 @@ def call_impl(problem: dict, fn, inputs: list, dps: bool, device, *, no_grad: bo
             fn(*inputs, *outs)
         else:
             outs = normalize_outputs(problem, fn(*inputs), device)
-    if torch.cuda.is_available():
+    if torch.cuda.is_available() and torch.device(device).type == "cuda":
         torch.cuda.synchronize(device)
     return outs
 
