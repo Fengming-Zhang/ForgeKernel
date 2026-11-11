@@ -29,6 +29,8 @@ ForgeKernel 属于 **Forge 家族**，同一家族的项目还有
 
 ## 动态
 
+- 🛠️ **[2026-11]** 发布 Claude Code skill `forge-start`：输入 `/forge-start`，它就替你配好并启动
+  （或续跑）一次 ForgeKernel 运行。见 [integrations/claude-code](integrations/claude-code/README.md)。
 - 📄 **[2026-11]** ForgeKernel 论文发布：[arXiv:2611.04998](https://arxiv.org/abs/2611.04998)。
 - 📄 **[2026-10]** JustGoal 论文发布：[arXiv:2610.36434](https://arxiv.org/abs/2610.36434)。
 - 🏆 **[2026-10]** 我们在 NVIDIA [SOL-ExecBench](https://research.nvidia.com/benchmarks/sol-execbench)
@@ -256,6 +258,7 @@ docs/                设计说明、milestone 模板、榜单、知识库收割
 scripts/             agent 启动脚本、/goal 驱动、自进化
 tests/               pytest 测试（只需 CPU）
 kernels/             ForgeKernel 生成的 kernel，按算子类型分类
+integrations/        claude-code/forge-start/：Claude Code 启动 skill（给用户用，不给 agent）
 ```
 
 ## 参与贡献
