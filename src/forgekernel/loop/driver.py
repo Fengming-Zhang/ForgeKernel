@@ -689,6 +689,13 @@ def _bindings(ctx: LoopContext) -> dict[str, str]:
         "{WORKSPACE}": str(ctx.workspace),
         "{KERNEL_FILE}": ctx.kernel_file,
         "{LANGUAGE}": ctx.language,
+        # The run's optimization log (skills/optimization-report): one HTML document
+        # per operator task under the run directory.  Kept OUTSIDE the student's git
+        # workspace so the log can never enter a kernel commit or the timed window.
+        "{OP}": ctx.op,
+        "{REPORT_PATH}": str(Path(ctx.workspace).parent / "report" / f"{ctx.op}.html"),
+        "{REPORT_TOOL}": str(repo_root / "skills" / "optimization-report"
+                             / "optimization_report.py"),
         "{META_MILESTONE_PATH}": str(repo_root / "meta_milestone.md"),
         "{MILESTONES_TEMPLATE_PATH}": str(repo_root / "docs" / "milestones-template.md"),
         # Absolute on purpose: the teacher runs with cwd = the student workspace,
@@ -929,7 +936,23 @@ def render_prompt(template_path: Path, bindings: dict[str, str], extra: str = ""
     text = template_path.read_text(encoding="utf-8")
     for token, value in bindings.items():
         text = text.replace(token, value)
-    return text + extra
+    return text + _standing_rules(template_path, bindings) + extra
+
+
+def _standing_rules(template_path: Path, bindings: dict[str, str]) -> str:
+    """The rules every agent turn carries (``meta/agent_rules.md``), rendered with the
+    same bindings as the role prompt.  A missing file (a test's temp meta dir, a
+    hand-made tree) simply adds nothing."""
+    meta_dir = template_path.parent
+    if meta_dir.name == "cuda":       # the CUDA overlay sits under meta/<language>/
+        meta_dir = meta_dir.parent
+    rules_path = meta_dir / "agent_rules.md"
+    if not rules_path.is_file():
+        return ""
+    text = rules_path.read_text(encoding="utf-8")
+    for token, value in bindings.items():
+        text = text.replace(token, value)
+    return "\n\n" + text.strip() + "\n"
 
 
 def _student_prompt(ctx: LoopContext, iter_no: int, probe_feedback: str = "") -> str:

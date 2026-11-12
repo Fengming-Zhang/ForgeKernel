@@ -118,8 +118,9 @@ forge run .artifacts/rmsnorm_<id>                       # 中断后续跑
 
 **预期输出。** 运行依次写判据、拿参照校准判据、测参照、蒸馏 milestone，然后迭代，直到 kernel
 达到参照的 1.2 倍或预算用完。结束时生成 `.artifacts/rmsnorm_<id>/report.md`，最好的 kernel 在
-`.artifacts/rmsnorm_<id>/best/kernel.py`。我们在 B200 上跑这个示例，约 1.5 小时后停在 PyTorch 参照的
-**5.2 倍**：
+`.artifacts/rmsnorm_<id>/best/kernel.py`；每次优化的"现象 -> 决策与行动 -> 结果"记录在
+`.artifacts/rmsnorm_<id>/report/rmsnorm.html`（agent 规则 R1）。我们在 B200 上跑这个示例，约
+1.5 小时后停在 PyTorch 参照的 **5.2 倍**：
 
 ```text
 - task: rmsnorm (source mode)

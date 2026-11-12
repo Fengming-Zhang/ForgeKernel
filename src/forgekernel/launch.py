@@ -628,7 +628,23 @@ def best_of(run, task) -> dict | None:
             "kernel": src.stdout if src.returncode == 0 else None}
 
 
+def _sync_optimization_log(run, task) -> Path | None:
+    """Final refresh of the run's HTML optimization log.  Per-round updates happen as
+    the trajectory records land; this catches a run that stopped before its last
+    in-place update.  Returns the HTML path when it exists."""
+    try:
+        from forgekernel.skills import optimization_report
+        op_dir = run.operators_dir / task.name
+        optimization_report.sync_for(op_dir / "student" / "status.jsonl")
+        optimization_report.sync_for(op_dir / "meta_status.jsonl")
+    except Exception:  # noqa: BLE001 — bookkeeping, never a reason to fail the report
+        pass
+    html = run.dir / "report" / f"{task.name}.html"
+    return html if html.is_file() else None
+
+
 def write_report(run, task, rc: int) -> Path:
+    log = _sync_optimization_log(run, task)
     rec = run.record()
     lines = [f"# {run.name}", "", f"- task: {task.name} ({task.mode} mode)",
              f"- status: {rec.get('status')} (stop: {rec.get('stop') or 'unknown'}, "
@@ -644,6 +660,8 @@ def write_report(run, task, rc: int) -> Path:
             kf.parent.mkdir(exist_ok=True)
             kf.write_text(best["kernel"], encoding="utf-8")
             lines.append(f"- kernel: {kf.relative_to(run.dir)}")
+    if log is not None:
+        lines.append(f"- optimization log: {log.relative_to(run.dir)}")
     lines.append(f"- workspace: {run.ws}")
     kb = kb_changes()
     if kb:

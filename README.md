@@ -132,8 +132,10 @@ confirmation of the best kernel meets it -- and 2 otherwise.
 **Expected output.** The run writes the correctness judge, calibrates it against the reference,
 measures the reference, distils a milestone, and iterates until the kernel is 1.2× the
 reference or the budget ends. It finishes with `.artifacts/rmsnorm_<id>/report.md` and the best
-kernel in `.artifacts/rmsnorm_<id>/best/kernel.py`. On a B200 our run of this example stopped at **5.2×** the
-PyTorch reference after about 1.5 hours:
+kernel in `.artifacts/rmsnorm_<id>/best/kernel.py`; every optimization point's
+observation → decision & action → result is recorded in
+`.artifacts/rmsnorm_<id>/report/rmsnorm.html` (agent rule R1). On a B200 our run of this
+example stopped at **5.2×** the PyTorch reference after about 1.5 hours:
 
 ```text
 - task: rmsnorm (source mode)

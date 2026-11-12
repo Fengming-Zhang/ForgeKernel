@@ -588,20 +588,25 @@ def secret_files_for(repo_root: Path, op: str | None, teacher_trees) -> tuple[Pa
 def from_config(cfg: dict, *, oracle_mode: str, repo_root: Path,
                 teacher_trees: list[Path],
                 dsl_source_dirs_default: tuple[Path, ...] | list[Path] = (),
-                op: str | None = None, language: str = "cutedsl") -> AgentPolicy:
+                op: str | None = None, language: str = "cutedsl",
+                report_dir: Path | None = None) -> AgentPolicy:
     """``dsl_source_dirs_default``: what ``loop.dsl_source.resolve`` derived for an
     empty ``[loop] dsl_source_dirs`` — used only when the key is empty; a declared
     list wins as written. ``op``: the operator card, whose ``submit.local.toml`` is
-    then denied to the student and a blackbox teacher (``secret_files``)."""
+    then denied to the student and a blackbox teacher (``secret_files``).
+    ``report_dir``: the run's optimization log, outside the student's workspace —
+    both roles may write there (the student's sandbox otherwise stops at its cwd)."""
     lc = cfg.get("loop", {})
     declared = lc.get(KEY_DSL_SOURCE_DIRS, [])
     if lang_mode.is_cuda(language):
         declared = lc.get(KEY_CUDA_SOURCE_DIRS) or declared
+    extra = [_abs(p) for p in lc.get(KEY_EXTRA_ALLOW_WRITE, [])]
+    if report_dir is not None:
+        extra.append(_abs(report_dir))
     return AgentPolicy(
         oracle_mode=oracle_mode,
         repo_root=_abs(repo_root),
-        extra_allow_write=tuple(dict.fromkeys(
-            _abs(p) for p in lc.get(KEY_EXTRA_ALLOW_WRITE, []))),
+        extra_allow_write=tuple(dict.fromkeys(extra)),
         ref_source_paths=tuple(_abs(p) for p in lc.get(KEY_REF_SOURCE_PATHS, [])),
         ref_source_urls=tuple(u.strip() for u in lc.get(KEY_REF_SOURCE_URLS, []) if u.strip()),
         teacher_trees=tuple(dict.fromkeys(_abs(p) for p in teacher_trees)),

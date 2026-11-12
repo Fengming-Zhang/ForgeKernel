@@ -167,6 +167,17 @@ def gate_ms(rec, gate_window: str = GATE_WINDOW_DEFAULT) -> float | None:
 def append_record(path: str | Path, rec: IterationRecord) -> None:
     with open(path, "a") as fh:
         fh.write(json.dumps(asdict(rec), ensure_ascii=False) + "\n")
+    _sync_optimization_log(path)
+
+
+def _sync_optimization_log(path: str | Path) -> None:
+    """Keep the run's HTML optimization log current after a record lands.  The log is
+    bookkeeping: a failure here must never take the loop down."""
+    try:
+        from forgekernel.skills import optimization_report
+        optimization_report.sync_for(path)
+    except Exception:  # noqa: BLE001 — never a reason to stop a run
+        pass
 
 
 def load_records(path: str | Path) -> list[IterationRecord]:

@@ -313,6 +313,8 @@ used up, or the teacher judges the target unreachable and the reachability check
   operators/_<op>ref/    with a reference: the recon tree (the sealed reference), the teacher's
   ws/             the student's workspace (a clone of the operator tree, the only place the student may write)
   best/           the best kernel
+  report/<op>.html  the optimization log: one entry per optimization point, each with
+                    observation -> decision & action -> result (the agent rule, R1)
   run.log         the run's output
   report.md       the final report
 ```

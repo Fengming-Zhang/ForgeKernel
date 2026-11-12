@@ -2665,13 +2665,17 @@ def _main(argv: list[str] | None = None) -> int:
                 "geomean over the same workloads.\n")
             return EXIT_TARGET_WORKLOADS
 
+    (workspace.parent / "report").mkdir(parents=True, exist_ok=True)
     policy = agent_policy_mod.from_config(
         cfg, oracle_mode=oracle_mode, repo_root=root, op=args.op,
         teacher_trees=_teacher_only_trees(
             cfg, root, args.op, oracle_mode,
             _student_denied_oracle(oracle_mode, args.oracle, cfg, declared_oracle)),
         dsl_source_dirs_default=dsl_source.dirs if dsl_source.defaulted else (),
-        language=language)
+        language=language,
+        # The run's optimization log lives in the run directory, outside the
+        # student's workspace; both roles append to it.
+        report_dir=workspace.parent / "report")
     backend = RealBackend(args.op, workspace, args.agent_cmd, args.git_name, args.git_email,
                           teacher_agent_cmd=args.teacher_agent_cmd, agent_policy=policy,
                           agent_heartbeat_s=args.agent_heartbeat_s)
